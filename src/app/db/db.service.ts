@@ -9,7 +9,7 @@ import {
   remove,
 } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment'; 
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
