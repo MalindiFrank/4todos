@@ -69,6 +69,7 @@ yarn-error.log*
 
 # Environment files (local configs)
 /.env.*
+.env
 
 
 # # Ignore development environment configuration

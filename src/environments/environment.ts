@@ -1,5 +1,5 @@
 export interface FirebaseConfig {
-    apiKey: string | undefined,
+    apiKey: string,
     authDomain: string,
     projectId: string,
     storageBucket: string,
