@@ -71,12 +71,12 @@ yarn-error.log*
 /.env.*
 
 
-# Ignore development environment configuration
-src/environments/environment.ts
-src/environments/environment.prod.ts
-/src/environments/environment.ts
-/src/environments/environment.prod.ts
+# # Ignore development environment configuration
+# src/environments/environment.ts
+# src/environments/environment.prod.ts
+# /src/environments/environment.ts
+# /src/environments/environment.prod.ts
 
-# Optional: other environment-specific files
-src/environments/environment.*.ts
-/src/environments/environment.*.ts
+# # Optional: other environment-specific files
+# src/environments/environment.*.ts
+# /src/environments/environment.*.ts
