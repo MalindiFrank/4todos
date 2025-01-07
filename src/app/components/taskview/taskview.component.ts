@@ -34,7 +34,6 @@ export class TaskViewComponent implements OnInit {
   }
 
   add() {
-    console.log('before', this.todos);
     if (this.taskName) {
       let todo = {
         name: this.taskName,
@@ -44,7 +43,6 @@ export class TaskViewComponent implements OnInit {
       };
       this.addTask(todo);
       this.todos.push(todo);
-      console.log('after', this.todos);
     }
   }
 
@@ -52,8 +50,8 @@ export class TaskViewComponent implements OnInit {
     const snapshot = await this.dbService.getTasks();
 
     this.todos = Object.keys(snapshot).map((key) => ({
-      id: key, // Use the key as the id
-      ...snapshot[key], // Spread the rest of the todo object properties
+      id: key, //use key as the id
+      ...snapshot[key], //spread the rest of the todo object properties
     }));
   }
 
@@ -68,10 +66,10 @@ export class TaskViewComponent implements OnInit {
   }
 
   isTaskComplete(id: string, bool: boolean = true): void {
-    // Find the index of the object with the matching id
+    //find the index of the object with the matching id
     const index = this.todos.findIndex((obj) => obj.id === id);
 
-    // If the object is found, update its 'done' property inside the array
+    //if the object is found, update its (completed) property inside the array
     if (index !== -1) {
       this.todos[index].completed = bool;
       this.dbService.createOrUpdateData(id, bool);
