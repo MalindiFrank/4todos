@@ -1,4 +1,4 @@
-<p>add a task</p>
+
 <div class="container">
 
   <div class="inputs-container">
@@ -17,23 +17,23 @@
     <button (click)="add()"> Add</button>
   </div>
 
-  <!-- <div>
-    <span *ngFor="let item of expenses" [ngClass]="item.expenseType">
-    </span>
-  </div> -->
-
+  
   <div *ngIf="todos;">
     <ul>
       <li *ngFor="let todo of todos">
-        <strong>Task ID:</strong> {{ todo.id }} <br>
-        <strong>Name:</strong> {{ todo.name }} <br>
-        <strong>Priority:</strong> {{ todo.priority }} <br>
-        <strong>Completed:</strong> {{ todo.completed }} <br>
+        <strong></strong> {{ todo.name }} <br>
+        <strong>Priority: </strong> {{ todo.priority }} <br>
+        <!-- <strong></strong> {{ todo.completed }} <br> -->
         <button (click)="deleteTask(todo.id)">Delete</button>
         <button *ngIf="todo.completed == false;" (click)="isTaskComplete(todo.id, true)">Mark as Complete</button>
         <hr>
       </li>
     </ul>
   </div>
-
+  
 </div>
+
+  <!-- <div>
+    <span *ngFor="let item of expenses" [ngClass]="item.expenseType">
+    </span>
+  </div> -->
