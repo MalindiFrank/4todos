@@ -17,13 +17,13 @@ export interface Environment {
 export const environment: Environment = {
   production: false,
   firebaseConfig: {
-  apiKey: "AIzaSyCMOmeS1zX6qhqIcJ5cFIVQoVV_SxUD7Lk",
-  authDomain: "angulartodos-89870.firebaseapp.com",
-  projectId: "angulartodos-89870",
-  storageBucket: "angulartodos-89870.firebasestorage.app",
-  messagingSenderId: "96884917987",
-  appId: "1:96884917987:web:33be1594ef97796d11a7d6",
-  measurementId: "G-CSR0CHLT6L",
-  databaseURL: "https://angulartodos-89870-default-rtdb.europe-west1.firebasedatabase.app/",
+    apiKey: process.env['FIREBASE_API_KEY'] || 'V_SxUD7Lk', 
+    authDomain: process.env['FIREBASE_AUTH_DOMAIN'] || '0.firebaseapp.com',
+    projectId: process.env['FIREBASE_PROJECT_ID'] || '-870',
+    storageBucket: process.env['FIREBASE_STORAGE_BUCKET'] || 'age.app',
+    messagingSenderId: process.env['FIREBASE_MESSAGING_SENDER_ID'] || '9687',
+    appId: process.env['FIREBASE_APP_ID'] || '1:968847d6',
+    measurementId: process.env['FIREBASE_MEASUREMENT_ID'] || 'GT6L',
+    databaseURL: process.env['FIREBASE_DATABASE_URL'] || '.europe-wtabase.app/',
   },
 };
