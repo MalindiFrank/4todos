@@ -32,9 +32,9 @@ export class TaskViewComponent implements OnInit {
   title: string | null = null; //store the selected priority
   description: string | null = null;
   dueDateTime: string | null = null;
-  selectedPriority: string | null = null;
-  selectedStatus: string | null = null;
-  selectedCategory: string | null = null;
+  selectedPriority: string | null = '';
+  selectedStatus: string | null = '';
+  selectedCategory: string | null = '';
   comments: string | null = null;
 
   todos: TaskItem[] = [];

@@ -116,7 +116,7 @@
     input[type="datetime-local"],
     select,
     button {
-      width: 33.33%;
+      width: 100%;
     }
   }
 
