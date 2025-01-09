@@ -60,7 +60,13 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #195e8b;
+}
+
+.title {
+  color: #2980b9;
+  padding-bottom: .5rem;
+  font-size: larger;
 }
 
 ul {

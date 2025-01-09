@@ -29,9 +29,9 @@ export interface TaskItem {
   styleUrl: './taskview.component.css',
 })
 export class TaskViewComponent implements OnInit {
-  title: string | null = null; //store the selected priority
+  title: string | null = null;
   description: string | null = null;
-  dueDateTime: string | null = null;
+  dueDateTime: string | null = '';
   selectedPriority: string | null = '';
   selectedStatus: string | null = '';
   selectedCategory: string | null = '';
@@ -80,6 +80,7 @@ export class TaskViewComponent implements OnInit {
       };
       this.addTask(todo);
       this.todos.push(todo);
+      this.clearData();
     }
   }
 
@@ -135,5 +136,15 @@ export class TaskViewComponent implements OnInit {
       minute: '2-digit',
     });
     return `${datePart} at ${timePart}`;
+  }
+
+  clearData(): void {
+    this.title = null;
+    this.comments = null;
+    this.description = null;
+    this.dueDateTime = '';
+    this.selectedStatus = '';
+    this.selectedPriority = '';
+    this.selectedCategory = '';
   }
 }

@@ -1,12 +1,15 @@
 <div class="container">
   <div class="inputs-container">
-    <input type="text" placeholder="Add a Task" [(ngModel)]="title" />
+    <input type="text" placeholder="* Add task title" [(ngModel)]="title" />
     <input
       type="text"
-      placeholder="Optional short description"
+      placeholder="Add optional short description"
       [(ngModel)]="description"
     />
-    <input type="datetime-local" name="" id="" [(ngModel)]="dueDateTime" />
+    <div>
+      Select Due Date:
+      <input type="datetime-local" [(ngModel)]="dueDateTime" />
+    </div>
   </div>
   <div class="select-item-type">
     <select [(ngModel)]="selectedPriority">
@@ -43,14 +46,28 @@
 <ng-container *ngIf="todos.length > 0; else noTodo">
   <ul>
     <li *ngFor="let todo of todos">
-      {{ todo.title }} <br />
-      <strong>Description: </strong> {{ todo.description }} <br />
-      <strong>Priority: </strong> {{ todo.priority }} <br />
-      <strong>Status: </strong> {{ todo.status }} <br />
-      <strong>Category: </strong> {{ todo.category }} <br />
-      <strong>Comments: </strong> {{ todo.comments }} <br />
-      <strong>Due Date: </strong> {{ todo.dueDateTime.formatted }} <br />
-      <strong>Created On: </strong> {{ todo.createdDate.formatted }} <br />
+      <p class="title">
+        {{ todo.title }}
+      </p>
+      <p *ngIf="todo.description">
+        <strong>Description: </strong> {{ todo.description }}
+      </p>
+      <p *ngIf="todo.priority">
+        <strong>Priority: </strong> {{ todo.priority }}
+      </p>
+      <p *ngIf="todo.status"><strong>Status: </strong> {{ todo.status }}</p>
+      <p *ngIf="todo.category">
+        <strong>Category: </strong> {{ todo.category }}
+      </p>
+      <p *ngIf="todo.comments">
+        <strong>Comments: </strong> {{ todo.comments }}
+      </p>
+      <p *ngIf="todo.dueDateTime.formatted">
+        <strong>Due Date: </strong> {{ todo.dueDateTime.formatted }}
+      </p>
+      <p *ngIf="todo.createdDate.formatted">
+        <strong>Created On: </strong> {{ todo.createdDate.formatted }}
+      </p>
       <div>
         <button (click)="deleteTask(todo.id)">Delete</button>
         <button
