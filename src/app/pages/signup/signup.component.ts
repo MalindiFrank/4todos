@@ -69,7 +69,7 @@ export class SignupComponent {
 
         onAuthStateChanged(this.auth, async (user) => {
           set(ref(this.db, 'users/' + user?.uid), {
-            name: username,
+            name: username?.toUpperCase(),
             email: email,
           });
         });

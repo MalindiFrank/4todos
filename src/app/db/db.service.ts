@@ -34,6 +34,12 @@ export class DatabaseService {
     });
   }
 
+  // 
+  async getUsername(): Promise<any> {
+    const snapshot = await get(ref(this.db, (this.path.slice(0, -5) + 'name')));
+    return snapshot.exists() ? snapshot.val() : null;
+  }
+
   // Read data
   async getTasks() {
     const snapshot = await get(ref(this.db, this.path));

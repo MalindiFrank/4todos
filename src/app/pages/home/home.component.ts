@@ -5,8 +5,6 @@ import { DatabaseService } from '../../db/db.service';
 import { CommonModule } from '@angular/common';
 import { TaskViewComponent } from '../../components/taskview/taskview.component';
 
-
-
 @Component({
   selector: 'app-home',
   imports: [CommonModule, TaskViewComponent],
@@ -14,6 +12,7 @@ import { TaskViewComponent } from '../../components/taskview/taskview.component'
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  username: any = '';
 
   constructor(
     private authService: AuthService,
@@ -27,6 +26,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+    this.getName();
   }
 
   onLogout() {
@@ -35,4 +35,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  async getName(): Promise<void> {
+    const user = await this.dbService.getUsername();
+    if (user) {
+      this.username = user;
+    }
+  }
 }
