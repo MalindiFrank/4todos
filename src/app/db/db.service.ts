@@ -28,11 +28,8 @@ export class DatabaseService {
 
     onAuthStateChanged(this.auth, (user: User | null) => {
       this.user = user;
-      console.log('inside: ', user);
       if (user) {
         this.path = 'users/' + this.user?.uid + '/todos';
-        console.log('path: ', this.path);
-        console.log('user: ', this.user);
       }
     });
   }
@@ -55,7 +52,8 @@ export class DatabaseService {
     return remove(ref(this.db, `${this.path}/${id}`));
   }
 
-  createOrUpdateData(id: string, data: any) {
-    return set(ref(this.db, `${this.path}/${id}/completed`), data);
+  //for now update only status
+  createOrUpdateData(id: string, data: string) {
+    return set(ref(this.db, `${this.path}/${id}/status`), data);
   }
 }

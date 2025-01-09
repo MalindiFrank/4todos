@@ -1,39 +1,80 @@
-
 <div class="container">
+  <div class="inputs-container">
+    <input type=" text" placeholder="Add a task" [(ngModel)]="title" />
+    <input
+      type="text"
+      placeholder="Optional short description"
+      [(ngModel)]="description"
+    />
+    <!-- <input type="datetime-local" name="" id="" [(ngModel)]="dueDateTime" /> -->
+    <div class="datetime-container">
+      <label for="dueDateTime" class="datetime-label">Select Date and Time</label>
+      <input type="datetime-local" id="dueDateTime" [(ngModel)]="dueDateTime" name="dueDateTime" />
+    </div>
+
+  </div>
+  <div class="select-item-type">
+    <select [(ngModel)]="selectedPriority">
+      <option value="" selected>Testing</option>
+      <option value="">Themba</option>
+      <option value="">Tng</option>
+    </select>
+
+    <select [(ngModel)]="selectedPriority">
+      <option value="" disabled [selected]="selectedPriority === null">
+        Select Priority
+      </option>
+      <option *ngFor="let priority of priorities" [value]="priority">
+        {{ priority }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedCategory">
+      <option value="" disabled>Select Category</option>
+      <option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedStatus">
+      <option value="" disabled>Set Status</option>
+      <option *ngFor="let status of statuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
 
   <div class="inputs-container">
-    <input type=" text" placeholder="Add a task" [(ngModel)]="taskName" />
-    <input type="datetime-local" name="" id="" [(ngModel)]="taskDateTime">
-
+    <input type="text" placeholder="Add comments" [(ngModel)]="comments" />
+    <button (click)="add()">Add</button>
   </div>
 
-  <div class="select-item-type">
-    <select [(ngModel)]="taskPriority">
-      <option value="" disabled selected>Select Priority</option>
-      <option value="high"> High</option>
-      <option value="medium"> Medium</option>
-      <option value="low"> Low</option>
-    </select>
-    <button (click)="add()"> Add</button>
-  </div>
-
-  
-  <div *ngIf="todos;">
-    <ul>
-      <li *ngFor="let todo of todos">
-        <strong></strong> {{ todo.name }} <br>
-        <strong>Priority: </strong> {{ todo.priority }} <br>
-        <!-- <strong></strong> {{ todo.completed }} <br> -->
-        <button (click)="deleteTask(todo.id)">Delete</button>
-        <button *ngIf="todo.completed == false;" (click)="isTaskComplete(todo.id, true)">Mark as Complete</button>
-        <hr>
-      </li>
-    </ul>
-  </div>
-  
+  <!-- displaying tasks + conditional rendering-->
 </div>
-
-  <!-- <div>
-    <span *ngFor="let item of expenses" [ngClass]="item.expenseType">
-    </span>
-  </div> -->
+<ng-container *ngIf="todos.length > 0; else noTodo">
+  <ul>
+    <li *ngFor="let todo of todos">
+      {{ todo.title }} <br />
+      <strong>Description: </strong> {{ todo.description }} <br />
+      <strong>Priority: </strong> {{ todo.priority }} <br />
+      <strong>Status: </strong> {{ todo.status }} <br />
+      <strong>Category: </strong> {{ todo.category }} <br />
+      <strong>Comments: </strong> {{ todo.comments }} <br />
+      <strong>Due Date: </strong> {{ todo.dueDateTime.formatted }} <br />
+      <strong>Created On: </strong> {{ todo.createdDate.formatted }} <br />
+      <div>
+        <button (click)="deleteTask(todo.id)">Delete</button>
+        <button
+          *ngIf="todo.status != 'Completed'"
+          (click)="isTaskComplete(todo.id)"
+        >
+          Mark Complete
+        </button>
+      </div>
+      <hr />
+    </li>
+  </ul>
+</ng-container>
+<ng-template #noTodo>
+  <p>No tasks found. Add one.</p>
+</ng-template>
