@@ -22,7 +22,7 @@
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
     <div *ngIf="errorMessage">{{ errorMessage }}</div>
   </form>
-  
+  <br>
   <button (click)="onSignup()">Don't have an account? Sign up</button>
   
   <div *ngIf="errorMessage" class="error-message">
