@@ -69,6 +69,11 @@ button:hover {
   font-size: larger;
 }
 
+summary {
+  font-size: 1.4rem;
+  padding-left: .5rem;
+}
+
 ul {
   list-style-type: none;
 }
