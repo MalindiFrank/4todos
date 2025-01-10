@@ -49,15 +49,16 @@ select {
 }
 
 button {
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 1.2rem;
   background-color: #3498db;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 0.3rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
 
 button:hover {
   background-color: #195e8b;
@@ -70,8 +71,9 @@ button:hover {
 }
 
 summary {
-  font-size: 1.4rem;
-  padding-left: .5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 ul {
@@ -83,15 +85,16 @@ li {
   border-radius: 0.3rem;
   padding: 1rem;
   margin-bottom: 10px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 li:hover {
   background-color: #f0f0f0;
+  transform: translateY(-5px);
 }
 
 li strong {
-  color: #2c3e50;
+  color: #495057;
 }
 
 li button {
@@ -99,14 +102,24 @@ li button {
   margin-right: 0.8rem;
   padding: 0.4rem 0.8rem;
   font-size: 0.9rem;
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 0.3rem;
+  color: #495057;
+  transition: background-color 0.3s ease;
+}
+
+li button:hover {
+  background-color: #ced4da;
 }
 
 li button:last-child {
-  background-color: #2ecc71;
+  background-color: #28a745;
+  color: #ffffff;
 }
 
 li button:last-child:hover {
-  background-color: #27ae60;
+  background-color: #218838;
 }
 
 hr {
@@ -125,10 +138,10 @@ hr {
   ul {
     display: flex;
     gap: 1rem;
-    justify-content: safe;
+    justify-content: space-evenly;
   }
 
   li {
-    width: 24rem;
+    min-width: 23rem;
   }
 }
