@@ -27,29 +27,47 @@ export class AuthService {
 
   async loginWithGoogle() {
     try {
+      this.provider.addScope('https://www.googleapis.com/auth/calendar');
+      // Sign in with popup
       const result: UserCredential = await signInWithPopup(
         this.auth,
         this.provider
       );
-      //get access token
+
+      // Get Google Access Token
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
+
+      // Get signed-in user info
       const user = result.user;
-      //additional user info
+
+      // Optionally, get additional user info
       const additionalUserInfo: AdditionalUserInfo | null =
         getAdditionalUserInfo(result);
 
       this.additionalUserInfo = additionalUserInfo;
 
-      //nb- had to do something right here...
+      //check provider
+      // this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
+
+      console.log('Access Token:', token);
+      console.log('User:', user);
+      console.log('UserName:', additionalUserInfo?.profile?.['given_name']);
+      console.log('Additional User Info:', additionalUserInfo);
+
+      console.error('Calling Calender:...');
+      await this.fetchGoogleCalendarEvents(token);
+
+      // Do something with the user data
     } catch (error: unknown) {
       if (error instanceof Error) {
+        // Handle Errors
         console.error('Error Code:', (error as any)?.code);
         console.error('Error Message:', (error as any)?.message);
         console.error('Error Email:', (error as any).customData?.email);
 
-        //firebase custom data, credential, checks nje
-        const firebaseError = error as any;
+        // Firebase custom data and credential
+        const firebaseError = error as any; // Type assertion for Firebase-specific error
         const email = firebaseError.customData?.email;
         const credential =
           GoogleAuthProvider.credentialFromError(firebaseError);
@@ -57,28 +75,66 @@ export class AuthService {
         console.error('Email Error:', email);
         console.error('Credential Error:', credential);
 
-        //other errors I don't know..
+        // Handle specific errors if needed
       } else {
         console.log('An unknown error occured: ', error);
       }
     }
   }
 
-  //login with email and password
+  //delete
+  async fetchGoogleCalendarEvents(accessToken: string | undefined) {
+    const calendarId = 'primary'; // Use 'primary' for the main calendar
+    const timeMin = new Date().toISOString(); // Current date/time in ISO format
+
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?timeMin=${encodeURIComponent(
+      timeMin
+    )}&orderBy=startTime&singleEvents=true`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Upcoming Events:', data.items);
+
+      // Loop through events
+      data.items.forEach((event: any) => {
+        console.log(`Event: ${event.summary}`);
+        console.log(`Start: ${event.start.dateTime || event.start.date}`);
+        console.log(`End: ${event.end.dateTime || event.end.date}`);
+      });
+    } catch (error) {
+      console.error('Failed to fetch events:', error);
+    }
+  }
+
+  //delete
+
+  // Login with email and password
   loginWithEmail(email: string, password: string): Promise<any> {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  //signup with email and password
+  // Signup with email and password
   signup(email: string, password: string): Promise<any> {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
+  // Sign out user
   logout(): Promise<void> {
     return signOut(this.auth);
   }
 
-  //check user is authenticated
+  // Check if the user is authenticated
   checkAuthState(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       onAuthStateChanged(this.auth, (user) => {

@@ -9,14 +9,13 @@ import {
   remove,
 } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { environment } from '../../environments/environment'; 
+import { environment } from '../../environments/environment';
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-
   private path: string = '';
   private db: Database;
   private user: User | null = null;
@@ -34,31 +33,27 @@ export class DatabaseService {
     });
   }
 
-  // 
   async getUsername(): Promise<any> {
-    const snapshot = await get(ref(this.db, (this.path.slice(0, -5) + 'name')));
+    const snapshot = await get(ref(this.db, this.path.slice(0, -5) + 'name'));
     return snapshot.exists() ? snapshot.val() : null;
   }
 
-  // Read data
   async getTasks() {
     const snapshot = await get(ref(this.db, this.path));
     return snapshot.exists() ? snapshot.val() : null;
   }
 
-  // Add a new item to a list
   addTask(task: Object) {
     const newRef = push(ref(this.db, `${this.path}`));
     return set(newRef, task);
   }
 
-  // Delete a record
   deleteTask(id: string) {
     console.log('Deleting task...');
     return remove(ref(this.db, `${this.path}/${id}`));
   }
 
-  //for now update only status
+  //for now update only status...re check this....
   createOrUpdateData(id: string, data: string) {
     return set(ref(this.db, `${this.path}/${id}/status`), data);
   }
