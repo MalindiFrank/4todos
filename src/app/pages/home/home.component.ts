@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
-    //this.getName();
+    this.getName();
   }
 
   onLogout() {
@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
     const user = await this.dbService.getUsername();
     if (user) {
       this.username = user;
+    } else {
+      //logged in with GoogleProvider
+      this.username =
+        this.authService.additionalUserInfo?.profile?.['given_name'];
     }
   }
 }

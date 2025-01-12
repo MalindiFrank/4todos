@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 //
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../auth/auth.service'; 
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -41,7 +41,7 @@ export class SignupComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
-    // Initialize the form with validation
+    //set form validation
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -49,12 +49,12 @@ export class SignupComponent {
     });
   }
 
-  // Getter for easy access to form controls
+  //getter for access to form controls
   get f() {
     return this.signupForm.controls;
   }
 
-  // Handle form submission
+  //handle and validate form submission
   onSignup() {
     if (this.signupForm.invalid) {
       return;
@@ -74,16 +74,15 @@ export class SignupComponent {
           });
         });
 
-        console.log('Name & Email Added!');
-
         this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.errorMessage = error.message;
+        console.log('Error: ', this.errorMessage)
       });
   }
 
-  // Navigate to login page
+  //navigate to login page
   onLogin() {
     this.router.navigate(['/login']);
   }

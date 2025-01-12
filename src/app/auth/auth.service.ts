@@ -10,6 +10,7 @@ import {
   UserCredential,
   getAdditionalUserInfo,
   Auth,
+  AdditionalUserInfo,
 } from 'firebase/auth';
 import { Observable } from 'rxjs';
 
@@ -19,6 +20,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private auth: Auth = getAuth();
   private provider: GoogleAuthProvider = new GoogleAuthProvider();
+
+  additionalUserInfo: AdditionalUserInfo | null = null
 
   constructor() {}
 
@@ -35,10 +38,13 @@ export class AuthService {
       const user = result.user;
 
       // Optionally, get additional user info
-      const additionalUserInfo = getAdditionalUserInfo(result);
+      const additionalUserInfo: AdditionalUserInfo | null = getAdditionalUserInfo(result);
 
+      this.additionalUserInfo = additionalUserInfo
+      
       console.log('Access Token:', token);
       console.log('User:', user);
+      console.log('UserName:', additionalUserInfo?.profile?.['given_name']);
       console.log('Additional User Info:', additionalUserInfo);
 
       // Do something with the user data
