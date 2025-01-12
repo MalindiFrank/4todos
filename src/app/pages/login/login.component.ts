@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../auth/auth.service'; 
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -29,38 +29,50 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
-    // Initialize the form with validation
+    //initialize form validation **incomplete
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Getter for easy access to form controls
+  //getter for easy access to form controls, **more to note
   get f() {
     return this.loginForm.controls;
   }
 
-  // Handle form submission
-  async onLogin() {
+  async onLoginWithGoogle() {
+    await this.authService
+      .loginWithGoogle()
+      .then(async () => {
+        this.router.navigate(['/home']);
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.log('Error: ', this.errorMessage);
+      });
+  }
+
+  //handle and validate form submission
+  async onLoginWithEmail() {
     if (this.loginForm.invalid) {
       return;
     }
 
     const { email, password }: any = this.loginForm.value;
 
-    // Access form values with ['email'] instead of .email
     await this.authService
-      .login(email, password)
+      .loginWithEmail(email, password)
       .then(async () => {
         this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.errorMessage = error.message;
+        console.log('Error: ', this.errorMessage);
       });
   }
 
-  // Navigate to signup page
+  //navigate to signup page
   onSignup() {
     this.router.navigate(['/signup']);
   }

@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
-    this.getName();
+    //this.getName();
   }
 
   onLogout() {
