@@ -31,7 +31,7 @@ export interface TaskItem {
 export class TaskViewComponent implements OnInit {
   title: string | null = null;
   description: string | null = null;
-  dueDateTime: string | null = '';
+  dueDateTime: string | null = null;
   selectedPriority: string | null = '';
   selectedStatus: string | null = '';
   selectedCategory: string | null = '';
