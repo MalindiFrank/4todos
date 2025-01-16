@@ -122,11 +122,6 @@ li button:last-child:hover {
   background-color: #218838;
 }
 
-hr {
-  border-top: 0.1rem solid #e0e0e0;
-  margin: 1rem 0;
-}
-
 @media (max-width: 600px) {
   .inputs-container,
   .select-item-type {

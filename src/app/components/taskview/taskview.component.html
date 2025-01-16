@@ -49,15 +49,15 @@
       <p class="title">
         {{ todo.title }}
       </p>
-      <p *ngIf="todo.description">
-        <strong>Description: </strong> {{ todo.description }}
-      </p>
       <p *ngIf="todo.createdDate.formatted">
         <strong>Created On: </strong> {{ todo.createdDate.formatted }}
       </p>
-
+      
       <details>
         <summary> . .. ..</summary>
+        <p *ngIf="todo.description">
+          <strong>Description: </strong> {{ todo.description }}
+        </p>
 
         <p *ngIf="todo.priority">
           <strong>Priority: </strong> {{ todo.priority }}
@@ -82,7 +82,6 @@
           Mark Complete
         </button>
       </div>
-      <hr />
     </li>
   </ul>
 </ng-container>
