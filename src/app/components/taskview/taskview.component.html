@@ -1,45 +1,52 @@
 <div class="container">
-  <div class="inputs-container">
-    <input type="text" placeholder="* Add task title" [(ngModel)]="title" />
-    <input
-      type="text"
-      placeholder="Add optional short description"
-      [(ngModel)]="description"
-    />
-    <div>
-      Select Due Date:
-      <input type="datetime-local" [(ngModel)]="dueDateTime" style="margin-top: 1rem;"/>
+  <details class="add-task">
+    <summary>Add a task</summary>
+    <div class="inputs">
+      
+      <div class="inputs-container">
+        <br>
+        <input type="text" placeholder="* Add task title" [(ngModel)]="title" />
+        <input
+        type="text"
+        placeholder="Add optional short description"
+        [(ngModel)]="description"
+        />
+        <div>
+          Select Due Date:
+          <input type="datetime-local" [(ngModel)]="dueDateTime" style="margin-top: 1rem;"/>
+        </div>
+      </div>
+      <div class="select-item-type">
+        <select [(ngModel)]="selectedPriority">
+          <option value="" disabled [selected]="selectedPriority === null">
+            Select Priority
+          </option>
+          <option *ngFor="let priority of priorities" [value]="priority">
+            {{ priority }}
+          </option>
+        </select>
+        
+        <select [(ngModel)]="selectedCategory">
+          <option value="" disabled>Select Category</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        
+        <select [(ngModel)]="selectedStatus">
+          <option value="" disabled>Set Status</option>
+          <option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="inputs-container">
+        <input type="text" placeholder="Add comments" [(ngModel)]="comments" />
+        <button (click)="add()">Add</button>
+      </div>
     </div>
-  </div>
-  <div class="select-item-type">
-    <select [(ngModel)]="selectedPriority">
-      <option value="" disabled [selected]="selectedPriority === null">
-        Select Priority
-      </option>
-      <option *ngFor="let priority of priorities" [value]="priority">
-        {{ priority }}
-      </option>
-    </select>
-
-    <select [(ngModel)]="selectedCategory">
-      <option value="" disabled>Select Category</option>
-      <option *ngFor="let category of categories" [value]="category">
-        {{ category }}
-      </option>
-    </select>
-
-    <select [(ngModel)]="selectedStatus">
-      <option value="" disabled>Set Status</option>
-      <option *ngFor="let status of statuses" [value]="status">
-        {{ status }}
-      </option>
-    </select>
-  </div>
-
-  <div class="inputs-container">
-    <input type="text" placeholder="Add comments" [(ngModel)]="comments" />
-    <button (click)="add()">Add</button>
-  </div>
+  </details>
 
   <!-- displaying tasks + conditional rendering-->
 </div>

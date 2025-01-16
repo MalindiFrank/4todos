@@ -44,6 +44,14 @@ select:focus {
   margin-bottom: 20px;
 }
 
+.add-task summary {
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  color: #3498db;
+  text-transform: uppercase;
+}
+
 select {
   flex: 1;
 }
@@ -59,14 +67,13 @@ button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
 button:hover {
   background-color: #195e8b;
 }
 
 .title {
   color: #2980b9;
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
   font-size: larger;
 }
 
